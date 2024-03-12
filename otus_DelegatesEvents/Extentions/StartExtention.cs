@@ -1,16 +1,15 @@
-﻿using otus_DelegatesEvents.Extensions;
+﻿using otus_DelegatesEvents.Extentions;
+using otus_DelegatesEvents.Tests;
 using otus_DelegatesEvents.Tests.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace otus_DelegatesEvents.ConsoleWriter
 {
-    internal class TestsExtention
+    internal class StartExtention
     {
-        public string TheBestTeam() {
+
+        public event EventHandler<GetMaxEventArgs> MaxElementFound;
+        public void TheBestTeam() {
             List<Team> teams = new List<Team>() {
             new Team() { TeamName = "Team A", TeamPoints = 33},
             new Team() { TeamName = "Team B", TeamPoints = 11},
@@ -18,10 +17,11 @@ namespace otus_DelegatesEvents.ConsoleWriter
             new Team() { TeamName = "Team D", TeamPoints = 99}};
 
             var bestTeam = teams.GetMax(t => t.TeamPoints);
-            return $"The best team in season: {bestTeam.TeamName} with {bestTeam.TeamPoints} points";
+            OnMaxElementFound($"event: The best team in season: {bestTeam.TeamName} with {bestTeam.TeamPoints} points");
+
         }
 
-        public string TheHighestMountain() {
+        public void TheHighestMountain() {
             List<Mountain> mountains = new List<Mountain>() {
             new Mountain(){ MountainName = "Mount Everest", MountainHeight = 8.848  },
             new Mountain(){ MountainName = "Tirich Mir", MountainHeight = 7.708 },
@@ -29,7 +29,12 @@ namespace otus_DelegatesEvents.ConsoleWriter
             new Mountain(){ MountainName = "Gyala Peri", MountainHeight =   7.294 }};
 
             var highestMountain = mountains.GetMax(m => (float)m.MountainHeight);
-            return $"The Highest mountain: {highestMountain.MountainName} with {highestMountain.MountainHeight} km.";
+            OnMaxElementFound($"event: The Highest mountain: {highestMountain.MountainName} with {highestMountain.MountainHeight} km.");
+        }
+
+        public void OnMaxElementFound(string message)
+        {
+            MaxElementFound(this, new GetMaxEventArgs(message));
         }
 
     }

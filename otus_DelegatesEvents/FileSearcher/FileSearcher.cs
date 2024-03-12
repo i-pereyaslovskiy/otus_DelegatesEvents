@@ -13,25 +13,24 @@ namespace otus_DelegatesEvents.FileSearcher
         FileArgs _fileArgs;
 
         public event EventHandler<FileArgs> FileFound;
-        public event EventHandler SearchStoped;
+        public event EventHandler SearchStopped;
         public FileSearcher()
         {
             _fileArgs = new FileArgs();
         }
 
-        public void JSGHD() {
+        public void Searching() {
 
             foreach (var file in Directory.EnumerateFiles(FileDir, "*.*"))
             {
                 if (_fileArgs.isStopSearching)
                 {
-                    OnSearchStoped();
+                    OnSearchStopped();
                     break;
                 }
                 OnFileFound(Path.GetFileName(file));
-              
             }
-        } 
+        }
 
         private void OnFileFound(string fileName)
         {
@@ -39,9 +38,9 @@ namespace otus_DelegatesEvents.FileSearcher
             FileFound(this, _fileArgs);
         }
 
-        private void OnSearchStoped()
+        private void OnSearchStopped()
         {
-            SearchStoped(this, EventArgs.Empty);
+            SearchStopped(this, EventArgs.Empty);
         }
 
     }

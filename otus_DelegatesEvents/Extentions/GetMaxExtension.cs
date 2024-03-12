@@ -1,15 +1,17 @@
-﻿using System;
+﻿using otus_DelegatesEvents.Extentions;
+using otus_DelegatesEvents.FileSearcher;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace otus_DelegatesEvents.Extensions
+namespace otus_DelegatesEvents.Tests
 {
     public static class GetMaxExtension
     {
-        public static T GetMax<T>(this IEnumerable<T> collection, Func<T, float> convertToNumber) where T:class
+        public static T GetMax<T>(this IEnumerable<T> collection, Func<T, float> convertToNumber) where T : class
         {
             T maxElement = collection.First();
             float maxValue = convertToNumber(maxElement);
@@ -23,8 +25,9 @@ namespace otus_DelegatesEvents.Extensions
                     maxElement = item;
                 }
             }
-
             return maxElement;
         }
+
+       
     }
 }
