@@ -8,7 +8,7 @@ namespace otus_DelegatesEvents.ConsoleWriter
     internal class StartExtention
     {
 
-        public event EventHandler<GetMaxEventArgs> MaxElementFound;
+        public event EventHandler<GetMaxEventArgs>? MaxElementFound;
         public void TheBestTeam() {
             List<Team> teams = new List<Team>() {
             new Team() { TeamName = "Team A", TeamPoints = 33},
@@ -34,7 +34,7 @@ namespace otus_DelegatesEvents.ConsoleWriter
 
         public void OnMaxElementFound(string message)
         {
-            MaxElementFound(this, new GetMaxEventArgs(message));
+            MaxElementFound!(this, new GetMaxEventArgs(message));
         }
 
     }

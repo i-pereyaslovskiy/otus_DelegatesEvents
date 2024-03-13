@@ -10,20 +10,18 @@ namespace otus_DelegatesEvents.FileSearcher
     internal class FileSearcher
     {
         const string FileDir = "../../../FilesStorage";
-        FileArgs _fileArgs;
 
-        public event EventHandler<FileArgs> FileFound;
-        public event EventHandler SearchStopped;
-        public FileSearcher()
-        {
-            _fileArgs = new FileArgs();
-        }
+
+        public event EventHandler<FileArgs>? FileFound;
+        public event EventHandler? SearchStopped;
+        public bool IsStopSearching;
 
         public void Searching() {
 
+
             foreach (var file in Directory.EnumerateFiles(FileDir, "*.*"))
             {
-                if (_fileArgs.isStopSearching)
+                if (IsStopSearching)
                 {
                     OnSearchStopped();
                     break;
@@ -34,8 +32,8 @@ namespace otus_DelegatesEvents.FileSearcher
 
         private void OnFileFound(string fileName)
         {
-            _fileArgs.FileName = fileName;
-            FileFound(this, _fileArgs);
+            FileArgs _fileArgs = new FileArgs(fileName);
+            FileFound!(this, _fileArgs);
         }
 
         private void OnSearchStopped()

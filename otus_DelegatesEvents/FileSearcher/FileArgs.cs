@@ -8,8 +8,12 @@ namespace otus_DelegatesEvents.FileSearcher
 {
     internal class FileArgs:EventArgs
     {
-        public string FileName { get; set; }
-        public bool isStopSearching { get; set; }
+        public string FileName { get; } = null!;
+
+        public FileArgs(string fileName)
+        {
+            FileName = fileName;
+        }
 
     }
 }

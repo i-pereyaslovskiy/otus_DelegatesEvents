@@ -36,7 +36,7 @@ void FileSearcher_FileFound(object sender, FileArgs e)
     Console.WriteLine($"event: \"{e.FileName}\" was found");
     Console.WriteLine("Press SPACE to stop:");
 
-     e.isStopSearching =  (Console.ReadKey().Key == ConsoleKey.Spacebar) ? true: false;
+    fileSearcher.IsStopSearching =  (Console.ReadKey().Key == ConsoleKey.Spacebar) ? true: false;
 }
 
 void FileSearcher_SearchStopped(object sender, EventArgs e)

@@ -13,6 +13,9 @@ namespace otus_DelegatesEvents.Tests
     {
         public static T GetMax<T>(this IEnumerable<T> collection, Func<T, float> convertToNumber) where T : class
         {
+            if (collection == null || !collection.Any())
+                throw new ArgumentException("Collection is Null or Empty");
+
             T maxElement = collection.First();
             float maxValue = convertToNumber(maxElement);
 
